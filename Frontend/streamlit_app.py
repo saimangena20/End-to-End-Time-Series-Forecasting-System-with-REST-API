@@ -8,9 +8,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 
 
-API_BASE_URL = os.getenv("API_BASE_URL", "http://127.0.0.1:5000").rstrip("/")
-if API_BASE_URL.lower() == "none":
-    API_BASE_URL = "http://127.0.0.1:5000"
+API_BASE_URL = "https://end-to-end-time-series-forecasting.onrender.com"
 
 # Page config
 st.set_page_config(
@@ -281,6 +279,7 @@ if forecast_button:
         except ValueError:
             st.error("The API returned an invalid JSON response.")
             st.stop()
+
 
     # Success message
     st.success(
