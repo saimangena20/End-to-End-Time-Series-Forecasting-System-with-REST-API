@@ -1,3 +1,6 @@
+import os
+from urllib.parse import quote
+
 import streamlit as st
 import requests
 import pandas as pd
@@ -5,7 +8,9 @@ import plotly.express as px
 import plotly.graph_objects as go
 
 
-API_BASE_URL = "http://127.0.0.1:5000"
+API_BASE_URL = os.getenv("API_BASE_URL", "http://127.0.0.1:5000").rstrip("/")
+if API_BASE_URL.lower() == "none":
+    API_BASE_URL = "http://127.0.0.1:5000"
 
 # Page config
 st.set_page_config(
@@ -175,32 +180,6 @@ machine learning and time-series analysis.
     unsafe_allow_html=True
 )
 
-# API Status Check
-
-try:
-
-    api_status = requests.get(
-        API_BASE_URL,
-        timeout=5
-    )
-
-    if api_status.status_code == 200:
-
-        st.success(
-            "🟢 Flask REST API Connected"
-        )
-
-    else:
-
-        st.error(
-            "🔴 API Connection Problem"
-        )
-
-except Exception:
-
-    st.error(
-        "🔴 Flask API Not Running"
-    )
 
 # Sidebar
 st.sidebar.header("Forecast Settings")
@@ -287,23 +266,21 @@ st.sidebar.markdown("---")
 st.sidebar.caption("Forecasts are generated using the selected state's most recent feature set.")
 
 # API URL
-API_URL = (
-    f"{API_BASE_URL}/predict/{selected_state}"
-)
+API_URL = f"{API_BASE_URL}/predict/{quote(selected_state, safe='')}"
 
 # Generate forecast
 if forecast_button:
-
-    with st.spinner(
-        "Generating forecast..."
-    ):
-
-        response = requests.get(
-            API_URL,
-            timeout=10
-        )
-
-        data = response.json()
+    with st.spinner("Generating forecast..."):
+        try:
+            response = requests.get(API_URL, timeout=30)
+            response.raise_for_status()
+            data = response.json()
+        except requests.RequestException as exc:
+            st.error(f"Failed to generate forecast from the API: {exc}")
+            st.stop()
+        except ValueError:
+            st.error("The API returned an invalid JSON response.")
+            st.stop()
 
     # Success message
     st.success(
@@ -345,11 +322,11 @@ if forecast_button:
             ]
         )
 
-        forecast_df = forecast_df.head(forecast_weeks)
-
         forecast_df["Predicted Sales"] = forecast_df[
             "Predicted Sales"
         ].round(2)
+
+        forecast_df = forecast_df.head(forecast_weeks)
 
         forecast_df = forecast_df[
             ["State Forecast Week", "Forecast Date", "Predicted Sales"]
