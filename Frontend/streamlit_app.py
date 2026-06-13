@@ -8,7 +8,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 
 
-API_BASE_URL = "https://end-to-end-time-series-forecasting.onrender.com"
+API_BASE_URL = "https://end-to-end-time-series-forecasting-f0zl.onrender.com"
 
 # Page config
 st.set_page_config(
@@ -270,8 +270,17 @@ API_URL = f"{API_BASE_URL}/predict/{quote(selected_state, safe='')}"
 if forecast_button:
     with st.spinner("Generating forecast..."):
         try:
-            response = requests.get(API_URL, timeout=30)
-            response.raise_for_status()
+            response = None
+
+            for attempt in range(2):
+                try:
+                    response = requests.get(API_URL, timeout=60)
+                    response.raise_for_status()
+                    break
+                except requests.RequestException:
+                    if attempt == 1:
+                        raise
+
             data = response.json()
         except requests.RequestException as exc:
             st.error(f"Failed to generate forecast from the API: {exc}")

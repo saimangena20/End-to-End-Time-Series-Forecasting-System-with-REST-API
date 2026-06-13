@@ -1,3 +1,5 @@
+import os
+
 from flask import Flask, jsonify
 from datetime import datetime, timedelta
 import joblib
@@ -170,4 +172,5 @@ def predict(state):
 # Run Flask app
 if __name__ == '__main__':
 
-    app.run(host="0.0.0.0", port=10000)
+    port = int(os.environ.get("PORT", 10000))
+    app.run(host="0.0.0.0", port=port)
