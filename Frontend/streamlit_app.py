@@ -8,7 +8,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 
 
-API_BASE_URL = "https://end-to-end-time-series-forecasting-f0zl.onrender.com"
+API_BASE_URL = "https://end-to-end-time-series-forecasting-imfp.onrender.com"
 
 # Page config
 st.set_page_config(
