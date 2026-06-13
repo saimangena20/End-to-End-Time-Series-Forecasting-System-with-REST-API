@@ -10,6 +10,23 @@ A comprehensive machine learning solution for generating dynamic state-wise sale
 
 ---
 
+## 📹 Video Explanation
+
+**Watch the complete project demonstration and explanation:**
+
+📺 **[View Project Explanation Video](https://drive.google.com/file/d/1aRX9yYzRP3-GpJgx3LyEjZNpITQNJeWX/view?usp=drive_link)**
+
+This video covers:
+- Complete project overview and system architecture
+- Feature engineering pipeline and model development
+- XGBoost model training and performance evaluation
+- REST API implementation and endpoints
+- Streamlit frontend dashboard demonstration
+- Live forecasting predictions for multiple US states
+- Step-by-step usage guide and best practices
+
+---
+
 ## US Dataset & Modeling Approach
 
 - **US Dataset**: The forecasting pipeline is trained and evaluated on a comprehensive US sales dataset (see `data/final_feature_engineered_data.xlsx`) covering 43 US states and historical records from 2019 through 2023. The dataset contains raw sales history plus engineered features used as model inputs.
@@ -29,6 +46,7 @@ A comprehensive machine learning solution for generating dynamic state-wise sale
 ## 📋 Table of Contents
 
 - [Overview](#overview)
+- [Video Explanation](#-video-explanation)
 - [Architecture](#architecture)
 - [Features](#features)
 - [Project Structure](#project-structure)
@@ -442,8 +460,7 @@ Contributions, issues, and feature requests are welcome! Feel free to check the 
 
 ## 📞 Support
 
-For questions or issues, please reach out to the developer.
-
+For questions or issues, please reach out to my mail saidurgamangena@gmail.com
 ---
 
 ## 🎓 Learning Resources
