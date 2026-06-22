@@ -16,6 +16,8 @@ A comprehensive machine learning solution for generating dynamic state-wise sale
 
 📺 **[View Project Explanation Video](https://drive.google.com/file/d/1aRX9yYzRP3-GpJgx3LyEjZNpITQNJeWX/view?usp=drive_link)**
 
+**Project Documentation:** https://drive.google.com/file/d/1jpyrJJN7vIUymy5WFj17y6Mp-QP8dOPo/view?usp=drive_link
+
 This video covers:
 - Complete project overview and system architecture
 - Feature engineering pipeline and model development
